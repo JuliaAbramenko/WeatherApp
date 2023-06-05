@@ -1,10 +1,18 @@
 package com.example.weatherapp.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class DailyUnits(
+    @SerializedName("sunrise")
     val sunrise: String,
+    @SerializedName("sunset")
     val sunset: String,
-    val temperature_2m_max: String,
-    val temperature_2m_min: String,
+    @SerializedName("temperature_2m_max")
+    val temperature2mMax: String,
+    @SerializedName("temperature_2m_min")
+    val temperature2mMin: String,
+    @SerializedName("time")
     val time: String,
-    val weathercode: String
+    @SerializedName("weathercode")
+    val weatherCode: String
 )

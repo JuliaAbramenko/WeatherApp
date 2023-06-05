@@ -1,14 +1,26 @@
 package com.example.weatherapp.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class HourlyUnits(
-    val cloudcover: String,
+    @SerializedName("cloudcover")
+    val cloudCover: String,
+    @SerializedName("rain")
     val rain: String,
+    @SerializedName("showers")
     val showers: String,
+    @SerializedName("snowfall")
     val snowfall: String,
-    val surface_pressure: String,
-    val temperature_2m: String,
+    @SerializedName("surface_pressure")
+    val surfacePressure: String,
+    @SerializedName("temperature_2m")
+    val temperature2m: String,
+    @SerializedName("time")
     val time: String,
-    val uv_index: String,
-    val weathercode: String,
-    val windspeed_10m: String
+    @SerializedName("uv_index")
+    val uvIndex: String,
+    @SerializedName("weathercode")
+    val weatherCode: String,
+    @SerializedName("windspeed_10m")
+    val windspeed10m: String
 )

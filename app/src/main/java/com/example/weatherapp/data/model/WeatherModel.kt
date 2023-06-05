@@ -1,12 +1,15 @@
 package com.example.weatherapp.data.model
 
+import com.example.weatherapp.enums.DailyEnum
+import com.example.weatherapp.enums.HourlyEnum
+
 data class WeatherModel(
     val current_weather: CurrentWeather,
-    val daily: Daily,
+    val daily: DailyEnum,
     val daily_units: DailyUnits,
     val elevation: Double,
     val generationtime_ms: Double,
-    val hourly: Hourly,
+    val hourly: HourlyEnum,
     val hourly_units: HourlyUnits,
     val latitude: Double,
     val longitude: Double,
