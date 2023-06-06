@@ -15,8 +15,8 @@ class WeatherRemoteDataSourceImpl(
     private val forecastDays: Int,
     private val windSpeedUnit: String,
     private val currentWeather: Boolean,
-    private val hourlyParamList: List<HourlyEnum>,
-    private val dailyParamList: List<DailyEnum>
+    private val hourlyParamList: List<String>,
+    private val dailyParamList: List<String>
 
 
     ) : WeatherRemoteDataSource {

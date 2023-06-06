@@ -9,6 +9,7 @@ import retrofit2.http.Query
 
 interface OpenMeteoService {
     @GET("v1/forecast")
+    @JvmSuppressWildcards
     suspend fun getWeather(
         @Query("latitude")
         latitude: Double,
@@ -19,12 +20,12 @@ interface OpenMeteoService {
         @Query("forecast_days")
         forecastDays: Int,
         @Query("windspeed_unit")
-        windspeedUnit: String,
+        windSpeedUnit: String,
         @Query("current_weather")
         currentWeather: Boolean,
         @Query("hourly")
-        hourlyParams: List<HourlyEnum>,
-        @Query("hourly")
-        dailyParams: List<DailyEnum>
+        hourlyParams: List<String>,
+        @Query("daily")
+        dailyParams: List<String>
     ) : Response<WeatherModel>
 }
