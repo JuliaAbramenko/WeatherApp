@@ -1,7 +1,7 @@
 package com.example.weatherapp.data.model
 
-import com.example.weatherapp.enums.DailyEnum
-import com.example.weatherapp.enums.HourlyEnum
+import com.example.weatherapp.data.enums.DailyEnum
+import com.example.weatherapp.data.enums.HourlyEnum
 
 data class WeatherModel(
     val current_weather: CurrentWeather,

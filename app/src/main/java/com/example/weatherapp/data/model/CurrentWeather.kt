@@ -2,7 +2,7 @@ package com.example.weatherapp.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.weatherapp.enums.WindSpeedUnitsEnum
+import com.example.weatherapp.data.enums.WindSpeedUnitsEnum
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken

@@ -1,4 +1,4 @@
-package com.example.weatherapp.enums
+package com.example.weatherapp.data.enums
 
 enum class WindSpeedUnitsEnum(val rep: String) {
     KMH("kmh"),
