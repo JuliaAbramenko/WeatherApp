@@ -1,5 +1,7 @@
 package com.example.weatherapp.data.api
 
+import com.example.weatherapp.data.enums.DailyEnum
+import com.example.weatherapp.data.enums.HourlyEnum
 import com.example.weatherapp.data.model.WeatherModel
 import retrofit2.Response
 import retrofit2.http.GET
@@ -19,6 +21,10 @@ interface OpenMeteoService {
         @Query("windspeed_unit")
         windspeedUnit: String,
         @Query("current_weather")
-        currentWeather: Boolean
+        currentWeather: Boolean,
+        @Query("hourly")
+        hourlyParams: List<HourlyEnum>,
+        @Query("hourly")
+        dailyParams: List<DailyEnum>
     ) : Response<WeatherModel>
 }
