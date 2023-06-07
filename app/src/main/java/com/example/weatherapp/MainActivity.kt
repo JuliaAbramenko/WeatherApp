@@ -9,6 +9,7 @@ import com.example.weatherapp.data.enums.DailyEnum
 import com.example.weatherapp.data.enums.HourlyEnum
 import com.example.weatherapp.data.enums.WindSpeedUnitsEnum
 import com.example.weatherapp.data.model.WeatherModel
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         val logging = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
-        val httpClient: OkHttpClient.Builder  = OkHttpClient.Builder()
+        val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
             if (!httpClient.interceptors().contains(logging)) {
                 httpClient.addInterceptor(logging)
             }
