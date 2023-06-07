@@ -4,20 +4,20 @@ import androidx.room.TypeConverter
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 // TODO
 class Converters {
     @TypeConverter
-    fun fromTimestamp(value: Long?): LocalDateTime? {
-        return value?.let {
-            LocalDateTime.ofInstant(
-                Instant.ofEpochMilli(it), ZoneId.systemDefault()
-            )
-        }
+    fun fromTimestamp(date: String?): LocalDateTime? {
+        val pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")
+        return LocalDateTime.parse(date, pattern)
+
     }
 
     @TypeConverter
-    fun LocalDateTimeToTimestamp(date: LocalDateTime?): Long? {
-        return date?.atZone(ZoneId.systemDefault())?.toInstant()?.toEpochMilli()
+    fun localDateTimeToString(date: LocalDateTime?): String? {
+        val pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")
+        return date!!.format(pattern)
     }
 }
