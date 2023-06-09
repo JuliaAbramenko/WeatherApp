@@ -35,6 +35,10 @@ android {
         dataBinding = true
         buildConfig = true
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
 }
 
 kapt {

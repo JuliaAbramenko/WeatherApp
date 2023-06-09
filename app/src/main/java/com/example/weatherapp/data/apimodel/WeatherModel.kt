@@ -17,8 +17,6 @@ data class WeatherModel(
     val dailyUnits: DailyUnits,
     @SerializedName("elevation")
     val elevation: Double,
-    @SerializedName("generationtime_ms")
-    val generationTimeMs: Double,
     @SerializedName("hourly")
     val hourly: Hourly,
     @SerializedName("hourly_units")
@@ -35,19 +33,19 @@ data class WeatherModel(
     fun toDailyWeatherEntities(): List<DailyWeatherEntity> {
         val list: MutableList<DailyWeatherEntity> = mutableListOf()
 
-        for(i in 0..this.daily.time.size) {
+        for(i in 0 until this.daily.time.size) {
             try {
                 list.add(
                     DailyWeatherEntity(
                         this.currentWeather.time,
                         this.longitude,
                         this.latitude,
-                        Converters().fromTimestamp(this.daily.time[i]),
+                        Converters().stringToLocalDate(this.daily.time[i]),
                         this.daily.weatherCode[i],
                         this.daily.temperature2mMax[i],
                         this.daily.temperature2mMin[i],
                         this.daily.sunrise[i],
-                        this.daily.sunrise[i]
+                        this.daily.sunset[i]
                     ))
             } catch (dateTimeParseException: DateTimeParseException) {
                 Log.e("DateTimeParse", dateTimeParseException.message!!)
@@ -67,6 +65,7 @@ data class WeatherModel(
             this.currentWeather.weatherCode
         )
     }
+
 
 
 }
