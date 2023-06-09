@@ -12,10 +12,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class WeatherLocalDataSourceImpl(private val weatherDao: WeatherDao) : WeatherLocalDataSource{
-    override suspend fun insertWeather(weather: List<DailyWeatherEntity>) {
+    override suspend fun insertDailyWeather(weather: List<DailyWeatherEntity>) {
         CoroutineScope(Dispatchers.IO).launch{
-            weatherDao.insertWeather(weather)
+            weatherDao.insertDailyWeather(weather)
         }
+    }
+
+    override suspend fun insertCurrentWeather(currentWeather: CurrentWeatherEntity) {
+        weatherDao.insertCurrentWeather(currentWeather)
     }
 
     override suspend fun clearCurrentWeatherDB() {

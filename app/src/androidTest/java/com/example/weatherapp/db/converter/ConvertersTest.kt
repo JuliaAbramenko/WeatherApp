@@ -1,13 +1,17 @@
-package com.example.weatherapp.data.db.converter
+package com.example.weatherapp.db.converter
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.weatherapp.data.db.converter.Converters
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.Month
 import java.time.format.DateTimeParseException
 
+@RunWith(AndroidJUnit4::class)
 class ConvertersTest {
     private var converter = Converters()
     @Before

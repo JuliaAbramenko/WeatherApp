@@ -1,16 +1,24 @@
-package com.example.weatherapp.data.apimodel
+package com.example.weatherapp.apimodel
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.weatherapp.data.apimodel.CurrentWeather
+import com.example.weatherapp.data.apimodel.Daily
+import com.example.weatherapp.data.apimodel.DailyUnits
+import com.example.weatherapp.data.apimodel.Hourly
+import com.example.weatherapp.data.apimodel.HourlyUnits
+import com.example.weatherapp.data.apimodel.WeatherModel
 import com.example.weatherapp.data.db.CurrentWeatherEntity
 import com.example.weatherapp.data.db.DailyWeatherEntity
 import com.example.weatherapp.data.db.converter.Converters
 import org.junit.Test
 import java.time.LocalDateTime
 import org.junit.Assert.*
+import org.junit.runner.RunWith
 import java.time.LocalDate
 import java.util.Date
 
+@RunWith(AndroidJUnit4::class)
 class WeatherModelTest {
-
 
     @Test
     fun toDailyWeatherEntities() {

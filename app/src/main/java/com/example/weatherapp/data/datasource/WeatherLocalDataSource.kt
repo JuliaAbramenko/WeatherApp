@@ -5,7 +5,9 @@ import com.example.weatherapp.data.apimodel.CurrentWeather
 import com.example.weatherapp.data.db.CurrentWeatherEntity
 
 interface WeatherLocalDataSource {
-    suspend fun insertWeather(weather: List<DailyWeatherEntity>)
+    suspend fun insertDailyWeather(weather: List<DailyWeatherEntity>)
+
+    suspend fun insertCurrentWeather(currentWeather: CurrentWeatherEntity)
 
     suspend fun clearCurrentWeatherDB()
 

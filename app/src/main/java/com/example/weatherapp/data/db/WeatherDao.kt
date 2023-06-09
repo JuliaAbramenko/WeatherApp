@@ -5,11 +5,15 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.weatherapp.data.apimodel.CurrentWeather
 
 @Dao
 interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertWeather(weather: List<DailyWeatherEntity>)
+    suspend fun insertDailyWeather(weather: List<DailyWeatherEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCurrentWeather(weather: CurrentWeatherEntity)
 
     @Query("DELETE FROM current_weather_db")
     suspend fun clearCurrentWeatherDB()
