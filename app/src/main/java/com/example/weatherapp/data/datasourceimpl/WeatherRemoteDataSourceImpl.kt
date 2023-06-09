@@ -1,10 +1,8 @@
 package com.example.weatherapp.data.datasourceimpl
 
 import com.example.weatherapp.data.api.OpenMeteoService
-import com.example.weatherapp.data.model.WeatherModel
+import com.example.weatherapp.data.apimodel.WeatherModel
 import com.example.weatherapp.data.datasource.WeatherRemoteDataSource
-import com.example.weatherapp.data.enums.DailyEnum
-import com.example.weatherapp.data.enums.HourlyEnum
 import retrofit2.Response
 
 class WeatherRemoteDataSourceImpl(

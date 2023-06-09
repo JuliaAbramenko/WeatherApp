@@ -8,8 +8,7 @@ import com.example.weatherapp.data.api.OpenMeteoService
 import com.example.weatherapp.data.enums.DailyEnum
 import com.example.weatherapp.data.enums.HourlyEnum
 import com.example.weatherapp.data.enums.WindSpeedUnitsEnum
-import com.example.weatherapp.data.model.WeatherModel
-import com.google.gson.Gson
+import com.example.weatherapp.data.apimodel.WeatherModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -66,9 +65,9 @@ class MainActivity : AppCompatActivity() {
         val logging = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
         val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
-            if (!httpClient.interceptors().contains(logging)) {
-                httpClient.addInterceptor(logging)
-            }
+        if (!httpClient.interceptors().contains(logging)) {
+            httpClient.addInterceptor(logging)
+        }
 
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -86,7 +85,6 @@ class MainActivity : AppCompatActivity() {
                 10,
                 WindSpeedUnitsEnum.KMH.rep,
                 requestCurrentWeather,
-
                 listOf(HourlyEnum.WEATHERCODE.rep,HourlyEnum.TEMPERATURE_2M.rep,HourlyEnum.SURFACE_PRESSURE.rep,HourlyEnum.CLOUDCOVER.rep,HourlyEnum.SNOWFALL.rep,HourlyEnum.RAIN.rep,HourlyEnum.SHOWERS.rep, HourlyEnum.UV_INDEX.rep),
                 listOf(DailyEnum.WEATHERCODE.rep,DailyEnum.TEMPERATURE_2M_MAX.rep, DailyEnum.TEMPERATURE_2M_MIN.rep,DailyEnum.SUNRISE.rep,DailyEnum.SUNSET.rep)
             )

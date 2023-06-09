@@ -1,8 +1,6 @@
 package com.example.weatherapp.data.api
 
-import com.example.weatherapp.data.enums.DailyEnum
-import com.example.weatherapp.data.enums.HourlyEnum
-import com.example.weatherapp.data.model.WeatherModel
+import com.example.weatherapp.data.apimodel.WeatherModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

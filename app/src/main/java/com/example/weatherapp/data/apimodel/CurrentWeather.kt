@@ -1,11 +1,7 @@
-package com.example.weatherapp.data.model
+package com.example.weatherapp.data.apimodel
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.example.weatherapp.data.enums.WindSpeedUnitsEnum
-import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
-import com.google.gson.reflect.TypeToken
 
 data class CurrentWeather(
     @SerializedName("is_day")
@@ -19,6 +15,6 @@ data class CurrentWeather(
     @SerializedName("weather_direction")
     val windDirection: Double,
     @SerializedName("wind_speed")
-    val windSpeed: WindSpeedUnitsEnum
+    val windSpeed: Double
 )
 
