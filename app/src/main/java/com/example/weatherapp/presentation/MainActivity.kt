@@ -1,9 +1,10 @@
-package com.example.weatherapp
+package com.example.weatherapp.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.weatherapp.R
 import com.example.weatherapp.data.api.OpenMeteoService
 import com.example.weatherapp.data.enums.DailyEnum
 import com.example.weatherapp.data.enums.HourlyEnum
