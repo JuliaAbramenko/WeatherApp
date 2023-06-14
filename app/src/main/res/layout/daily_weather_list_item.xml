@@ -14,6 +14,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/listItemMaxTemperatureTextview"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,23 +31,43 @@
             app:layout_constraintTop_toTopOf="@+id/listItemImageView" />
 
         <TextView
-            android:id="@+id/listItemWeatherTextView"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
+            android:id="@+id/listItemWeatherSunrise"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:text="05:38"
+            android:drawableLeft="@drawable/ic_sunrise"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:drawableTint="@color/yellow"
+            android:drawablePadding="2dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/listItemImageView" />
+
+        <TextView
+            android:id="@+id/listItemWeatherSunset"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:text="20:38"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="4dp"
+            android:drawableLeft="@drawable/ic_moon"
+            android:drawablePadding="2dp"
+            android:drawableTint="@color/black"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            app:layout_constraintStart_toEndOf="@+id/listItemWeatherSunrise"
+            app:layout_constraintTop_toBottomOf="@+id/listItemDateTextView" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="112dp" />
+            app:layout_constraintGuide_begin="150dp" />
 
         <TextView
             android:id="@+id/listItemMaxTemperatureTextview"
@@ -53,6 +75,12 @@
             android:layout_height="20dp"
             android:layout_marginTop="16dp"
             android:text="Max C°"
+            android:textSize="16dp"
+            android:drawableLeft="@drawable/arrow_up"
+            android:drawablePadding="2dp"
+            android:drawableTint="@color/red"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/listItemImageView"
@@ -64,6 +92,12 @@
             android:layout_height="20dp"
             android:layout_marginTop="40dp"
             android:text="Min C°"
+            android:textSize="16dp"
+            android:drawableLeft="@drawable/arrow_down"
+            android:drawablePadding="2dp"
+            android:drawableTint="@color/blue"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/listItemMaxTemperatureTextview"

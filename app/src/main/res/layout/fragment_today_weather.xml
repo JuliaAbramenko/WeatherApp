@@ -25,10 +25,15 @@
 
         <TextView
             android:id="@+id/todayWeatherMaxTemp"
-            android:layout_width="77dp"
+            android:layout_width="100dp"
             android:layout_height="35dp"
             android:layout_margin="16dp"
             android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/arrow_up"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:drawableTint="@color/red"
+            android:drawablePadding="2dp"
             android:text="Max °C"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,10 +41,15 @@
 
         <TextView
             android:id="@+id/todayWeatherMinTemp"
-            android:layout_width="77dp"
+            android:layout_width="100dp"
             android:layout_height="35dp"
             android:layout_margin="16dp"
             android:layout_marginTop="16dp"
+            android:drawableLeft="@drawable/arrow_down"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:drawableTint="@color/blue"
+            android:drawablePadding="2dp"
             android:text="Min °C"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/todayWeatherMaxTemp"
@@ -64,6 +74,16 @@
             android:textSize="80sp"
             app:layout_constraintStart_toEndOf="@+id/todayWeatherCurrentTemp"
             app:layout_constraintTop_toTopOf="@+id/todayWeatherCurrentTemp" />
+
+        <ImageView
+            android:id="@+id/todayWeatherIcon"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="136dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
