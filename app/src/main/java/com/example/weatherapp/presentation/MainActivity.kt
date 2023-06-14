@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.weatherapp.R
@@ -14,6 +15,7 @@ import com.example.weatherapp.data.apimodel.WeatherModel
 import com.example.weatherapp.data.enums.DailyEnum
 import com.example.weatherapp.data.enums.HourlyEnum
 import com.example.weatherapp.data.enums.WindSpeedUnitsEnum
+import com.example.weatherapp.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.CoroutineScope
@@ -31,13 +33,14 @@ class MainActivity : AppCompatActivity() {
     //private var latitude = 0.0
     private var requestCurrentWeather = true
     private val tabsArray = arrayOf("Heute", "Morgen", "10 Tage")
+    private lateinit var binding: ActivityMainBinding
 
     @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val tabLayout: TabLayout = findViewById(R.id.tabLayout)
-        val viewPager: ViewPager2 = findViewById(R.id.viewPager)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val tabLayout = binding.tabLayout
+        val viewPager = binding.viewPager
 
         val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
         viewPager.adapter = adapter
