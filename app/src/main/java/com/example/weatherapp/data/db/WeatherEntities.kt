@@ -13,7 +13,7 @@ data class DailyWeatherEntity(
     val dailyTemperature2mMax: Double,
     val dailyTemperature2mMin: Double,
     val sunrise: String,
-    val sunset: String,
+    val sunset: String
 )
 
 @Entity (tableName = "current_weather_db", primaryKeys = ["timestamp", "longitude", "latitude"])
@@ -23,5 +23,5 @@ data class CurrentWeatherEntity(
     val latitude: Double,
     val currentTemperature: Double,
     val currentWindSpeed: Double,
-    val currentWeatherCode: Int,
+    val currentWeatherCode: Int
 )
