@@ -47,9 +47,30 @@ class ConvertersTest {
     }
 
     @Test
+    fun stringToLocalDate2() {
+        val string = "2022-12-11T03:38"
+        val localDate = LocalDate.of(2022, 12, 11)
+        assertEquals(converter.stringToLocalDate(string), localDate)
+    }
+
+    @Test
     fun localDateToString() {
         val localDate = LocalDate.of(2023, 6, 9)
         assertEquals(converter.localDateToString(localDate), "2023-06-09")
+    }
 
+    @Test
+    fun longToLocalDate() {
+        val currentTimeMillis = System.currentTimeMillis()
+        val result = LocalDate.now()
+        assertEquals(converter.longToLocalDate(currentTimeMillis), result)
+    }
+
+    @Test
+    fun localDateToLong() {
+        val now = LocalDate.now()
+        val currentTimeMillis = System.currentTimeMillis()
+        // test should be executed only after midnight
+        assert(currentTimeMillis > converter.localDateToLong(now))
     }
 }

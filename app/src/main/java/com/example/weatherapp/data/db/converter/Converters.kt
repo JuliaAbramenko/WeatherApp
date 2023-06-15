@@ -1,6 +1,7 @@
 package com.example.weatherapp.data.db.converter
 
 import androidx.room.TypeConverter
+import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -34,6 +35,11 @@ class Converters {
     @TypeConverter
     fun localDateToLong(localDate: LocalDate) : Long {
         return localDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+    }
+
+    @TypeConverter
+    fun longToLocalDate(long: Long) : LocalDate {
+        return Instant.ofEpochMilli(long).atZone(ZoneId.systemDefault()).toLocalDate()
     }
 
 }

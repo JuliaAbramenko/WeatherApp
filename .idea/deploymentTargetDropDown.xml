@@ -11,6 +11,15 @@
       <entry key="app">
         <State />
       </entry>
+      <entry key="localDateToLong()">
+        <State />
+      </entry>
+      <entry key="longToLocalDate()">
+        <State />
+      </entry>
+      <entry key="stringToLocalDate2()">
+        <State />
+      </entry>
     </value>
   </component>
 </project>
