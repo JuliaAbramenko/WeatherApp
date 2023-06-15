@@ -10,10 +10,14 @@ import com.example.weatherapp.R
 import com.example.weatherapp.data.db.DailyWeatherEntity
 import com.example.weatherapp.databinding.FragmentTodayWeatherBinding
 import com.example.weatherapp.databinding.FragmentTomorrowWeatherBinding
+import com.example.weatherapp.util.WeatherCodeAndTimeToIcon
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 class TomorrowWeatherFragment : Fragment() {
 
     private lateinit var binding : FragmentTomorrowWeatherBinding
+    private var codeTransformer = WeatherCodeAndTimeToIcon()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,6 +27,12 @@ class TomorrowWeatherFragment : Fragment() {
     }
 
     fun setData(dailyWeatherEntities: List<DailyWeatherEntity>){
+        val weatherImage = codeTransformer.getIcon(true, dailyWeatherEntities[1].dailyWeatherCode)
+        binding.tomorrowWeatherIcon.setImageResource(weatherImage)
 
+        val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
+        binding.tomorrowWeatherDateTitle.text = dailyWeatherEntities[1].timestamp.toString().format(formatter)
+        binding.tomorrowWeatherMaxTemp.text = dailyWeatherEntities[1].dailyTemperature2mMax.toString()
+        binding.tomorrowWeatherMinTemp.text = dailyWeatherEntities[1].dailyTemperature2mMin.toString()
     }
 }

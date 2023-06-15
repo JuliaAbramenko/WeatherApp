@@ -25,55 +25,36 @@
 
             <TextView
                 android:id="@+id/tomorrowWeatherMaxTemp"
-                android:layout_width="100dp"
-                android:layout_height="35dp"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
                 android:layout_margin="16dp"
                 android:layout_marginTop="8dp"
                 android:drawableLeft="@drawable/arrow_up"
-                android:scaleX="0.7"
-                android:scaleY="0.7"
-                android:drawableTint="@color/red"
                 android:drawablePadding="2dp"
+                android:drawableTint="@color/red"
+                android:scaleX="1"
+                android:scaleY="1"
                 android:text="Max °C"
-                android:textSize="20sp"
+                android:textSize="52sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tomorrowWeatherDateTitle" />
+
 
             <TextView
                 android:id="@+id/tomorrowWeatherMinTemp"
-                android:layout_width="100dp"
-                android:layout_height="35dp"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
                 android:layout_margin="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:drawableLeft="@drawable/arrow_down"
-                android:scaleX="0.7"
-                android:scaleY="0.7"
-                android:drawableTint="@color/blue"
                 android:drawablePadding="2dp"
+                android:drawableTint="@color/blue"
+                android:scaleX="1"
+                android:scaleY="1"
                 android:text="Min °C"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/tomorrowWeatherMaxTemp"
-                app:layout_constraintTop_toBottomOf="@+id/tomorrowWeatherDateTitle" />
-
-            <TextView
-                android:id="@+id/tomorrowWeatherCurrentTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="32dp"
-                android:text="18"
-                android:textSize="120sp"
+                android:textSize="52sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tomorrowWeatherMaxTemp" />
-
-            <TextView
-                android:id="@+id/tomorrowWeatherCurrentCelsius"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="°C"
-                android:textSize="80sp"
-                app:layout_constraintStart_toEndOf="@+id/tomorrowWeatherCurrentTemp"
-                app:layout_constraintTop_toTopOf="@+id/tomorrowWeatherCurrentTemp" />
 
             <ImageView
                 android:id="@+id/tomorrowWeatherIcon"
