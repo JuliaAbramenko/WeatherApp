@@ -19,13 +19,14 @@ import java.util.Date
 
 @RunWith(AndroidJUnit4::class)
 class WeatherModelTest {
-
+    private val converter = Converters()
     @Test
     fun toDailyWeatherEntities() {
         val model = createWeatherModel()
         val dailyWeatherEntities = model.toDailyWeatherEntities()
+        val localDateTimestamp = converter.stringToLocalDate("2023-06-09T18:00")
         val shouldBe = DailyWeatherEntity(
-            "2023-06-09T18:00",
+            converter.localDateToLong(localDateTimestamp),
             10.02,
             48.38,
             Converters().stringToLocalDate("2023-06-09"),
@@ -42,13 +43,15 @@ class WeatherModelTest {
     fun toCurrentWeatherEntity() {
         val model = createWeatherModel()
         val currentWeatherEntity = model.toCurrentWeatherEntity()
+        val localDateTimestamp = converter.stringToLocalDate("2023-06-09T18:00")
         val shouldBe = CurrentWeatherEntity(
-            "2023-06-09T18:00",
+            converter.localDateToLong(localDateTimestamp),
             10.02,
             48.38,
             24.6,
             20.0,
-            1
+            1,
+            true
         )
         assertEquals(currentWeatherEntity, shouldBe)
     }

@@ -31,16 +31,18 @@ data class WeatherModel(
     val timezoneAbbreviation: String,
 ) {
     fun toDailyWeatherEntities(): List<DailyWeatherEntity> {
+        val converter = Converters()
         val list: MutableList<DailyWeatherEntity> = mutableListOf()
 
         for(i in 0 until this.daily.time.size) {
             try {
+                val localDateTimestamp = converter.stringToLocalDate(this.currentWeather.time)
                 list.add(
                     DailyWeatherEntity(
-                        this.currentWeather.time.toLong(),
+                        converter.localDateToLong(localDateTimestamp),
                         this.longitude,
                         this.latitude,
-                        Converters().stringToLocalDate(this.daily.time[i]),
+                        converter.stringToLocalDate(this.daily.time[i]),
                         this.daily.weatherCode[i],
                         this.daily.temperature2mMax[i],
                         this.daily.temperature2mMin[i],
@@ -56,8 +58,10 @@ data class WeatherModel(
     }
 
     fun toCurrentWeatherEntity(): CurrentWeatherEntity {
+        val converter = Converters()
+        val localDateTimestamp = converter.stringToLocalDate(this.currentWeather.time)
         return CurrentWeatherEntity(
-            this.currentWeather.time.toLong(),
+            converter.localDateToLong(localDateTimestamp),
             this.longitude,
             this.latitude,
             this.currentWeather.temperature,
