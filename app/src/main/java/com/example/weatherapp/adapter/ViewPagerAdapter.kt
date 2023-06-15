@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.weatherapp.presentation.fragments.TenDaysWeatherFragment
-import com.example.weatherapp.presentation.fragments.TodayWeatherFragment
-import com.example.weatherapp.presentation.fragments.TomorrowWeatherFragment
+import com.example.weatherapp.ui.fragments.TenDaysWeatherFragment
+import com.example.weatherapp.ui.fragments.TodayWeatherFragment
+import com.example.weatherapp.ui.fragments.TomorrowWeatherFragment
 
 class ViewPagerAdapter (fragmentManager: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {

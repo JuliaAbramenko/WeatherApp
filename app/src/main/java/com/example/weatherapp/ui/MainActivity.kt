@@ -1,13 +1,18 @@
-package com.example.weatherapp.presentation
+package com.example.weatherapp.ui
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.pm.PackageManager
+import android.icu.util.TimeZone
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
-import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
 import com.example.weatherapp.R
 import com.example.weatherapp.adapter.ViewPagerAdapter
 import com.example.weatherapp.data.api.OpenMeteoService
@@ -16,7 +21,6 @@ import com.example.weatherapp.data.enums.DailyEnum
 import com.example.weatherapp.data.enums.HourlyEnum
 import com.example.weatherapp.data.enums.WindSpeedUnitsEnum
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,58 +33,30 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
-    //private var longitude = 0.0
-    //private var latitude = 0.0
+    private var longitude = 0.0
+    private var latitude = 0.0
+    private lateinit var timeZone : TimeZone
     private var requestCurrentWeather = true
     private val tabsArray = arrayOf("Heute", "Morgen", "10 Tage")
     private lateinit var binding: ActivityMainBinding
 
+
+
     @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        val tabLayout = binding.tabLayout
-        val viewPager = binding.viewPager
+        setUpTabLayout()
+        findLongitudeAndLatitude()
+        getTimeZone()
+        startRetrofit()
 
-        val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
-        viewPager.adapter = adapter
+    }
 
-        TabLayoutMediator(tabLayout,viewPager) {
-                tab, position -> tab.text = tabsArray[position]
-        }.attach()
+    private fun getTimeZone() {
+        timeZone = TimeZone.getDefault()
+    }
 
-        // TODO: request longitude and latitude from GPS
-        /*
-        try {
-            if (ContextCompat.checkSelfPermission(
-                    applicationContext,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                    101
-                )
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0F, LocationListener{
-
-        })
-        if (locationManager != null) {
-
-            val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-            if (location != null) {
-                latitude = location.latitude;
-                longitude = location.longitude;
-
-            }
-        }
-*/
+    private fun startRetrofit() {
 
         val logging = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -110,6 +86,51 @@ class MainActivity : AppCompatActivity() {
             )
             Log.i("Retrofit","COROUTINE EXECUTED WITH $response.code")
         }
+    }
+
+    private fun findLongitudeAndLatitude() {
+        try {
+            if (ContextCompat.checkSelfPermission(
+                    applicationContext,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    101
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0F, LocationListener{
+
+        })
+        if (locationManager != null) {
+
+            val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+
+            if (location != null) {
+                latitude = location.latitude
+                longitude = location.longitude
+            }
+        }
+
+    }
+
+    private fun setUpTabLayout() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val tabLayout = binding.tabLayout
+        val viewPager = binding.viewPager
+
+        val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
+        viewPager.adapter = adapter
+
+        TabLayoutMediator(tabLayout,viewPager) {
+                tab, position -> tab.text = tabsArray[position]
+        }.attach()
 
     }
 }

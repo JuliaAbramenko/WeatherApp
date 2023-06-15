@@ -2,10 +2,11 @@ package com.example.weatherapp.data.db
 
 import androidx.room.Entity
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Entity(tableName = "daily_weather_db", primaryKeys = ["timestamp", "longitude", "latitude"])
 data class DailyWeatherEntity(
-    val timestamp: String,
+    val timestamp: Long,
     val longitude: Double,
     val latitude: Double,
     val dailyTime: LocalDate,
@@ -18,10 +19,11 @@ data class DailyWeatherEntity(
 
 @Entity (tableName = "current_weather_db", primaryKeys = ["timestamp", "longitude", "latitude"])
 data class CurrentWeatherEntity(
-    val timestamp: String,
+    val timestamp: Long,
     val longitude: Double,
     val latitude: Double,
     val currentTemperature: Double,
     val currentWindSpeed: Double,
-    val currentWeatherCode: Int
+    val currentWeatherCode: Int,
+    val isDay: Boolean
 )

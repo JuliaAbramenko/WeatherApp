@@ -37,7 +37,7 @@ data class WeatherModel(
             try {
                 list.add(
                     DailyWeatherEntity(
-                        this.currentWeather.time,
+                        this.currentWeather.time.toLong(),
                         this.longitude,
                         this.latitude,
                         Converters().stringToLocalDate(this.daily.time[i]),
@@ -57,12 +57,13 @@ data class WeatherModel(
 
     fun toCurrentWeatherEntity(): CurrentWeatherEntity {
         return CurrentWeatherEntity(
-            this.currentWeather.time,
+            this.currentWeather.time.toLong(),
             this.longitude,
             this.latitude,
             this.currentWeather.temperature,
             this.currentWeather.windSpeed,
-            this.currentWeather.weatherCode
+            this.currentWeather.weatherCode,
+            this.currentWeather.isDay == 1
         )
     }
 
