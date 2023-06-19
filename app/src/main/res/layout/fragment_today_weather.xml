@@ -2,11 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<data>
-    <variable
-        name="weatherToday"
-        type="com.example.weatherapp.data.db.CurrentWeatherEntity" />
-</data>
+
+    <data>
+        <variable
+            name="todayWeatherViewModel"
+            type="com.example.weatherapp.ui.viewmodels.WeatherTodayViewModel" />
+    </data>
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:textSize="32sp"
-            android:text="13. Juni 2023"
+            android:text="@{todayWeatherViewModel.date}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +39,7 @@
             android:scaleY="0.7"
             android:drawableTint="@color/red"
             android:drawablePadding="2dp"
-            android:text="Max °C"
+            android:text='@{String.valueOf(todayWeatherViewModel.tempMax) + "°C"}'
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/todayWeatherDateTitle" />
@@ -54,7 +55,7 @@
             android:scaleY="0.7"
             android:drawableTint="@color/blue"
             android:drawablePadding="2dp"
-            android:text="Min °C"
+            android:text='@{String.valueOf(todayWeatherViewModel.tempMin) + "°C"}'
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/todayWeatherMaxTemp"
             app:layout_constraintTop_toBottomOf="@+id/todayWeatherDateTitle" />
@@ -64,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="32dp"
-            android:text="14"
+            android:text='@{String.valueOf(todayWeatherViewModel.currentTemp) }'
             android:textSize="120sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/todayWeatherMaxTemp" />
@@ -84,7 +85,7 @@
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_marginBottom="136dp"
-            android:src="@drawable/code0_day"
+            app:imageResource="@{todayWeatherViewModel.image}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
