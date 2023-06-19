@@ -11,14 +11,14 @@ import com.example.weatherapp.databinding.DailyWeatherListItemBinding
 import com.example.weatherapp.util.WeatherCodeAndTimeToIcon
 
 class DailyWeatherAdapter (private val dailyWeatherList : List<DailyWeatherEntity>) : RecyclerView.Adapter<DailyWeatherAdapter.WeatherViewHolder>() {
-    inner class WeatherViewHolder (private val itemBinding: DailyWeatherListItemBinding):
-        RecyclerView.ViewHolder(itemBinding.root){
-            var image : ImageView = itemBinding.listItemImageView
-            var date : TextView = itemBinding.listItemDateTextView
-            var sunrise : TextView = itemBinding.listItemWeatherSunrise
-            var sunset : TextView = itemBinding.listItemWeatherSunset
-            var minTemp : TextView = itemBinding.listItemMinTemperatureTextview
-            var maxTemp : TextView = itemBinding.listItemMaxTemperatureTextview
+    inner class WeatherViewHolder (binding: DailyWeatherListItemBinding):
+        RecyclerView.ViewHolder(binding.root){
+            var image : ImageView = binding.listItemImageView
+            var date : TextView = binding.listItemDateTextView
+            var sunrise : TextView = binding.listItemWeatherSunrise
+            var sunset : TextView = binding.listItemWeatherSunset
+            var minTemp : TextView = binding.listItemMinTemperatureTextview
+            var maxTemp : TextView = binding.listItemMaxTemperatureTextview
 
     }
 
@@ -31,7 +31,7 @@ class DailyWeatherAdapter (private val dailyWeatherList : List<DailyWeatherEntit
     }
 
     override fun getItemCount(): Int {
-        return  10
+        return 10
     }
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
