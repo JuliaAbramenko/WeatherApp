@@ -38,13 +38,13 @@ class WeatherLocalDataSourceImpl(private val weatherDao: WeatherDao) : WeatherLo
         return weatherDao.getCurrentWeather()
     }
 
-    override suspend fun getWeatherToday(today: String): DailyWeatherEntity {
+    override suspend fun getWeatherToday(today: Long): DailyWeatherEntity {
         return weatherDao.getWeatherToday(today)
     }
 
     override suspend fun getWeather10Days(
-        startDay: String,
-        untilDate: String
+        startDay: Long,
+        untilDate: Long
     ): List<DailyWeatherEntity> {
         return weatherDao.getWeather10Days(startDay,untilDate)
 

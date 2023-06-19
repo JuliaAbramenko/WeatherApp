@@ -15,7 +15,7 @@ interface WeatherLocalDataSource {
 
     suspend fun getCurrentWeather() : CurrentWeatherEntity
 
-    suspend fun getWeatherToday(today: String): DailyWeatherEntity
+    suspend fun getWeatherToday(today: Long): DailyWeatherEntity
 
-    suspend fun getWeather10Days(startDay: String, untilDate: String): List<DailyWeatherEntity>
+    suspend fun getWeather10Days(startDay: Long, untilDate: Long): List<DailyWeatherEntity>
 }

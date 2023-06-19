@@ -25,8 +25,8 @@ interface WeatherDao {
     suspend fun getCurrentWeather() : CurrentWeatherEntity
 
     @Query("SELECT * FROM daily_weather_db WHERE dailyTime=:today")
-    suspend fun getWeatherToday(today: String): DailyWeatherEntity
+    suspend fun getWeatherToday(today: Long): DailyWeatherEntity
 
     @Query("SELECT * FROM daily_weather_db WHERE dailyTime >= :startDay AND dailyTime <= :untilDate ")
-    suspend fun getWeather10Days(startDay: String, untilDate: String): List<DailyWeatherEntity>
+    suspend fun getWeather10Days(startDay: Long, untilDate: Long): List<DailyWeatherEntity>
 }
