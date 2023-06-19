@@ -8,6 +8,8 @@ import android.icu.util.TimeZone
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -17,6 +19,10 @@ import com.example.weatherapp.R
 import com.example.weatherapp.adapter.ViewPagerAdapter
 import com.example.weatherapp.data.api.OpenMeteoService
 import com.example.weatherapp.data.apimodel.WeatherModel
+import com.example.weatherapp.data.datasource.WeatherLocalDataSource
+import com.example.weatherapp.data.datasource.WeatherRemoteDataSource
+import com.example.weatherapp.data.datasourceimpl.WeatherRemoteDataSourceImpl
+import com.example.weatherapp.data.db.WeatherDatabase
 import com.example.weatherapp.data.enums.DailyEnum
 import com.example.weatherapp.data.enums.HourlyEnum
 import com.example.weatherapp.data.enums.WindSpeedUnitsEnum
@@ -39,16 +45,40 @@ class MainActivity : AppCompatActivity() {
     private var requestCurrentWeather = true
     private val tabsArray = arrayOf("Heute", "Morgen", "10 Tage")
     private lateinit var binding: ActivityMainBinding
+    private lateinit var weatherRemoteDataSource : WeatherRemoteDataSource
+    private lateinit var database : WeatherDatabase
 
 
 
     @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setUpTabLayout()
         findLongitudeAndLatitude()
         getTimeZone()
         startRetrofit()
+        initDataSources()
+        setUpTabLayout()
+    }
+
+    private fun initDataSources() {
+        database = WeatherDatabase.getDatabase(applicationContext)
+        val handler = Handler(Looper.getMainLooper())
+        val runnable: Runnable = object : Runnable {
+            override fun run() {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val body = weatherRemoteDataSource.getWeather().body()!!
+                    val forecast = body.toDailyWeatherEntities()
+                    val current = body.toCurrentWeatherEntity()
+                    database.weatherDao().insertDailyWeather(forecast)
+                    database.weatherDao().insertCurrentWeather(current)
+                }
+                handler.postDelayed(this, 30000)
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
 
     }
 
@@ -73,19 +103,18 @@ class MainActivity : AppCompatActivity() {
 
         val apiService = retrofit.create(OpenMeteoService::class.java)
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val response: Response<WeatherModel>  = apiService.getWeather(
-                48.39,
-                10.01,
-                "Europe/Berlin",
-                10,
-                WindSpeedUnitsEnum.KMH.rep,
-                requestCurrentWeather,
-                listOf(HourlyEnum.WEATHERCODE.rep,HourlyEnum.TEMPERATURE_2M.rep,HourlyEnum.SURFACE_PRESSURE.rep,HourlyEnum.CLOUDCOVER.rep,HourlyEnum.SNOWFALL.rep,HourlyEnum.RAIN.rep,HourlyEnum.SHOWERS.rep, HourlyEnum.UV_INDEX.rep),
-                listOf(DailyEnum.WEATHERCODE.rep,DailyEnum.TEMPERATURE_2M_MAX.rep, DailyEnum.TEMPERATURE_2M_MIN.rep,DailyEnum.SUNRISE.rep,DailyEnum.SUNSET.rep)
-            )
-            Log.i("Retrofit","COROUTINE EXECUTED WITH $response.code")
-        }
+        weatherRemoteDataSource = WeatherRemoteDataSourceImpl(apiService,
+            48.39,
+            10.01,
+            "Europe/Berlin",
+            10,
+            WindSpeedUnitsEnum.KMH.rep,
+            requestCurrentWeather,
+            listOf(HourlyEnum.WEATHERCODE.rep,HourlyEnum.TEMPERATURE_2M.rep,HourlyEnum.SURFACE_PRESSURE.rep,HourlyEnum.CLOUDCOVER.rep,HourlyEnum.SNOWFALL.rep,HourlyEnum.RAIN.rep,HourlyEnum.SHOWERS.rep, HourlyEnum.UV_INDEX.rep),
+            listOf(DailyEnum.WEATHERCODE.rep,DailyEnum.TEMPERATURE_2M_MAX.rep, DailyEnum.TEMPERATURE_2M_MIN.rep,DailyEnum.SUNRISE.rep,DailyEnum.SUNSET.rep)
+        )
+
+
     }
 
     private fun findLongitudeAndLatitude() {
@@ -125,7 +154,7 @@ class MainActivity : AppCompatActivity() {
         val tabLayout = binding.tabLayout
         val viewPager = binding.viewPager
 
-        val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
+        val adapter = ViewPagerAdapter(weatherRemoteDataSource, database,supportFragmentManager, lifecycle)
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout,viewPager) {
